@@ -1,10 +1,15 @@
 <template>
-  <h1>test</h1>
+  <NavigationComponent />
 </template>
 
 <script>
 
+import NavigationComponent from './components/navigation/navigation.vue';
+
 export default {
   name: 'App',
+  components:{
+    NavigationComponent
+  }
 }
 </script>
