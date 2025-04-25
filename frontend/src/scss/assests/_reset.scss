@@ -8,3 +8,13 @@ html{
     font-size: 62.5%;
     font-family: sans-serif;
 }
+
+body{
+    max-width: 80rem;
+    margin: 0 auto;
+    background: white;
+}
+
+#app{
+    position: relative;
+}

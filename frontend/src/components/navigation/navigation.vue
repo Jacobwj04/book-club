@@ -4,11 +4,11 @@
             <figure class="nav__figure">
                 <img src="../../assets/logo.png" alt="" class="nav__img">
             </figure>
-            <button class="nav__selection">
+            <button class="nav__selection" @click="toggleDropdown">
                 For you
                 <SvgIcon :name="'chevron-short'" />
             </button>
-            <ul class="nav__dropdown">
+            <ul ref="dropdown" class="nav__dropdown" :class="dropdownIsActive ? `nav__dropdown--active` : ``">
                 <li class="nav__dropdown--items">
                     For you
                 </li>
@@ -24,22 +24,38 @@
             <button class="nav__button">
                 <SvgIcon :name="'bell'" />
             </button>
-            <button class="nav__button">
-                <SvgIcon :name="'chat'" />
-            </button>
         </section>
     </nav>
 </template>
 
 <script>
-
 import SvgIcon from '../general/SvgIcon.vue';
 
 export default {
     name: "NavigationComponent",
     components: {
         SvgIcon
+    },
+    data() {
+        return {
+            dropdownIsActive: false
+        };
+    },
+    methods: {
+        toggleDropdown() {
+            this.dropdownIsActive = !this.dropdownIsActive;
+        },
+        handleClickOutside(event) {
+            if (this.dropdownIsActive && this.$refs.dropdown && !this.$refs.dropdown.contains(event.target) && event.target !== this.$el.querySelector('.nav__selection')) {
+                this.dropdownIsActive = false;
+            }
+        }
+    },
+    mounted() {
+        document.addEventListener('click', this.handleClickOutside);
+    },
+    beforeUnmount() {
+        document.removeEventListener('click', this.handleClickOutside);
     }
-}
-
+};
 </script>
