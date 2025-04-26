@@ -16,7 +16,10 @@
                 </li>
             </ul>
         </section>
-        <section class="nav__wrapper">
+        <section class="nav__ButtonWrapper">
+            <button class="nav__button">
+                <SvgIcon :name="'heart'" />
+            </button>
             <button class="nav__button">
                 <SvgIcon :name="'find-people'" />
             </button>
