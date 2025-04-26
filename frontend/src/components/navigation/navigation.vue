@@ -4,9 +4,8 @@
             <figure class="nav__figure">
                 <img src="../../assets/logo.png" alt="" class="nav__img">
             </figure>
-            <button class="nav__selection" @click="toggleDropdown">
-                For you
-                <SvgIcon :name="'chevron-short'" />
+            <button class="nav__selection" @click="toggleDropdown($event)">
+                For you <SvgIcon :name="'chevron-short'" />
             </button>
             <ul ref="dropdown" class="nav__dropdown" :class="dropdownIsActive ? `nav__dropdown--active` : ``">
                 <li class="nav__dropdown--items">
@@ -42,11 +41,12 @@ export default {
         };
     },
     methods: {
-        toggleDropdown() {
+        toggleDropdown(event) {
             this.dropdownIsActive = !this.dropdownIsActive;
+            event.stopPropagation(); 
         },
         handleClickOutside(event) {
-            if (this.dropdownIsActive && this.$refs.dropdown && !this.$refs.dropdown.contains(event.target) && event.target !== this.$el.querySelector('.nav__selection')) {
+             if (this.dropdownIsActive && this.$refs.dropdown && !this.$refs.dropdown.contains(event.target) && event.target !== this.$el.querySelector('.nav__selection')) {
                 this.dropdownIsActive = false;
             }
         }
